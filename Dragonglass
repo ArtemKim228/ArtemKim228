@@ -1,0 +1,64 @@
+```python
+import random
+import string
+
+class Player:
+    def __init__(self):
+        self.currency = 0
+        self.hints = 0
+
+    def earn_currency(self, amount):
+        self.currency += amount
+
+    def spend_currency(self, amount):
+        if self.currency >= amount:
+            self.currency -= amount
+            return True
+        else:
+            print("Недостаточно валюты.")
+            return False
+
+    def buy_hint(self):
+        if self.spend_currency(10):  # Цена подсказки: 10 валюты
+            self.hints += 1
+            print("Вы купили подсказку. У вас теперь", self.hints, "подсказок.")
+        else:
+            print("Покупка отменена из-за нехватки валюты.")
+
+    def redeem_promo_code(self, code):
+        if code == "FREECURRENCY":
+            amount = 50  # За промо-код "FREECURRENCY" игрок получает 50 валюты
+            self.earn_currency(amount)
+            print(f"Вы ввели промо-код '{code}' и получили {amount} валюты.")
+        else:
+            print("Недействительный промо-код.")
+
+# Функция для отображения меню
+def display_menu():
+    print("\n=== Меню Dragon Glass ===")
+    print("1. Играть")
+    print("2. Промо-коды (замок)")
+    print("3. Ваш счет:", player.currency, "валюты")
+    print("4. Выйти")
+
+# Пример использования
+player = Player()
+
+while True:
+    display_menu()
+    choice = input("Выберите опцию: ")
+
+    if choice == "1":
+        print("Игра Dragon Glass началась!")
+        # Здесь можно добавить вашу игровую логику
+    elif choice == "2":
+        entered_code = input("Введите промо-код: ")
+        player.redeem_promo_code(entered_code)
+    elif choice == "3":
+        player.buy_hint()
+    elif choice == "4":
+        print("Выход из игры.")
+        break
+    else:
+        print("Некорректный выбор. Попробуйте еще раз.")
+```
